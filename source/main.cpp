@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <GL/glut.h>
 #include <GL/glext.h>
-#include <string>
+#include <sstream>
 #include "src_path.h"
 #include "Image/IMAGE.h"
 #include "Maths/Maths.h"
@@ -68,13 +68,12 @@ void Init(void)
 
 	//Load normal map
 	IMAGE normalMapImage;
-//  std::stringstream fn;
-//  fn << texture_path;
-//  fn << "NormalMap.bmp";
-//  normalMapImage.Load(fn.str().c_str());
-  //sstd::string fn(texture_path);
+  std::stringstream fn;
+  fn << texture_path;
+  fn << "NormalMap.bmp";
+  normalMapImage.Load(fn.str().c_str());
 
-  normalMapImage.Load("NormalMap.bmp");
+//  normalMapImage.Load("NormalMap.bmp");
   normalMapImage.ExpandPalette();
 	
 	//Convert normal map to texture
@@ -89,11 +88,11 @@ void Init(void)
 
 	//Load decal image
 	IMAGE decalImage;
-  //std::stringstream fn_decal;
-  //fn_decal << texture_path;
-  //fn_decal << "Decal.bmp";
-  //decalImage.Load(fn_decal.str().c_str());
-  decalImage.Load("Decal.bmp");
+  std::stringstream fn_decal;
+  fn_decal << texture_path;
+  fn_decal << "Decal.bmp";
+  decalImage.Load(fn_decal.str().c_str());
+//  decalImage.Load("Decal.bmp");
 	decalImage.ExpandPalette();
 	
 	//Convert decal image to texture

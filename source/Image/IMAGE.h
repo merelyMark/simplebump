@@ -14,21 +14,44 @@
 
 #ifndef IMAGE_H
 #define IMAGE_H
-#define DWORD unsigned int
-struct BITMAPFILEHEADER {
-  short bfType;
-  int bfSize;
-  short Reserved1;
-  short Reserved2;
-  int bfOffBits;
-};
+#define BYTE  unsigned char
+#define DWORD  unsigned int
+#define LONG  int
+#define UINT  unsigned int
+#define WORD  unsigned short int
 
-struct BITMAPINFOHEADER {
-  int biSize;
-  long biWidth;
-  long biHeight;
-  DWORD biBitCount;
-};
+#define LPSTR  char*
+
+#pragma pack(1)
+typedef struct tagBITMAPFILEHEADER {
+  WORD    bfType;
+  DWORD   bfSize;
+  WORD    bfReserved1;
+  WORD    bfReserved2;
+  DWORD   bfOffBits;
+} BITMAPFILEHEADER, *PBITMAPFILEHEADER;
+
+#pragma pack()
+typedef struct tagBITMAPINFOHEADER{
+  DWORD  biSize;
+  LONG   biWidth;
+  LONG   biHeight;
+  WORD   biPlanes;
+  WORD   biBitCount;
+  DWORD  biCompression;
+  DWORD  biSizeImage;
+  LONG   biXPelsPerMeter;
+  LONG   biYPelsPerMeter;
+  DWORD  biClrUsed;
+  DWORD  biClrImportant;
+} BITMAPINFOHEADER, *PBITMAPINFOHEADER;
+
+typedef struct tagRGBQUAD {
+  BYTE    rgbBlue;
+  BYTE    rgbGreen;
+  BYTE    rgbRed;
+  BYTE    rgbReserved;
+} RGBQUAD;
 class IMAGE
 {
 public:

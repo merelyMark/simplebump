@@ -1,0 +1,13 @@
+
+#ifndef __SRC_PATH_H
+#define __SRC_PATH_H
+
+#include <string>
+#define shader_path "${PROJECT_SOURCE_DIR}/source/Shaders/"
+//std::string shader_path = std::string("${PROJECT_SOURCE_DIR}/Shaders/");
+
+#define texture_path "${PROJECT_SOURCE_DIR}/source/textures/"
+//std::string texture_path = std::string("${PROJECT_SOURCE_DIR}/textures/");
+
+#define model_path "${PROJECT_SOURCE_DIR}/../data/"
+#endif

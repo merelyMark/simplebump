@@ -10,8 +10,10 @@
 //////////////////////////////////////////////////////////////////////////////////////////	
 #define WIN32_LEAN_AND_MEAN
 #include <stdio.h>
-#include <GL/glut.h>
-#include <GL/glext.h>
+#include "GL/glew.h"
+#define FREEGLUT_STATIC
+#include "GL/freeglut.h"
+#include "GL/glext.h"
 #include <sstream>
 #include "src_path.h"
 #include "Image/IMAGE.h"
@@ -168,7 +170,7 @@ void Display(void)
 		glEnable(GL_TEXTURE_2D);
 
 		//Bind normalisation cube map to texture unit 1
-		glActiveTextureARB(GL_TEXTURE1_ARB);
+		glActiveTexture(GL_TEXTURE1_ARB);
 		glBindTexture(GL_TEXTURE_CUBE_MAP_ARB, normalisationCubeMap);
 		glEnable(GL_TEXTURE_CUBE_MAP_ARB);
 		glActiveTextureARB(GL_TEXTURE0_ARB);
@@ -182,10 +184,10 @@ void Display(void)
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 		//Send tangent space light vectors for normalisation to unit 1
-		glClientActiveTextureARB(GL_TEXTURE1_ARB);
+		glClientActiveTexture(GL_TEXTURE1_ARB);
 		glTexCoordPointer(3, GL_FLOAT, sizeof(TORUS_VERTEX), &torus.vertices[0].tangentSpaceLight);
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		glClientActiveTextureARB(GL_TEXTURE0_ARB);
+		glClientActiveTexture(GL_TEXTURE0_ARB);
 
 
 		//Set up texture environment to do (tex0 dot tex1)*color
@@ -220,9 +222,9 @@ void Display(void)
 	
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	
-		glClientActiveTextureARB(GL_TEXTURE1_ARB);
+		glClientActiveTexture(GL_TEXTURE1_ARB);
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-		glClientActiveTextureARB(GL_TEXTURE0_ARB);
+		glClientActiveTexture(GL_TEXTURE0_ARB);
 
 		//Return to standard modulate texenv
 		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
@@ -345,10 +347,12 @@ void Keyboard(unsigned char key, int x, int y)
 
 int main(int argc, char** argv)
 {
+
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(640, 480);
 	glutCreateWindow("Simple Bumpmapping");
+	glewInit();
 
 	Init();
 

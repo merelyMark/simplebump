@@ -14,6 +14,8 @@
 
 #ifndef IMAGE_H
 #define IMAGE_H
+
+#ifndef WIN32
 #define BYTE  unsigned char
 #define DWORD  unsigned int
 #define LONG  int
@@ -52,6 +54,7 @@ typedef struct tagRGBQUAD {
   BYTE    rgbRed;
   BYTE    rgbReserved;
 } RGBQUAD;
+#endif
 class IMAGE
 {
 public:
@@ -71,22 +74,22 @@ public:
 	}
 
 	//Load image
-	bool Load(char * filename);
+	bool Load(const char * filename);
 
 	//Use the color indices from a paletted image as the alpha channel for this image
 	bool LoadAlpha(const IMAGE & alphaImage);
 
 protected:
 	//Load BMPs
-	bool LoadBMP(char * filename);
-	bool Load8BitBMP(char * filename);
-	bool Load24BitBMP(char * filename);
+	bool LoadBMP(const char * filename);
+	bool Load8BitBMP(const char * filename);
+	bool Load24BitBMP(const char * filename);
 
 	//Load TGAs
-	bool LoadTGA(char * filename);
-	bool LoadUncompressed8BitTGA(char * filename);
-	bool LoadUncompressedTrueColorTGA(char * filename);
-	bool LoadCompressedTrueColorTGA(char * filename);
+	bool LoadTGA(const char * filename);
+	bool LoadUncompressed8BitTGA(const char * filename);
+	bool LoadUncompressedTrueColorTGA(const char * filename);
+	bool LoadCompressedTrueColorTGA(const char * filename);
 
 	//Calculate the number of bytes in a row, including padding bytes
 	unsigned int CalculateStride(unsigned int testBpp=-1, unsigned int testWidth=-1);
